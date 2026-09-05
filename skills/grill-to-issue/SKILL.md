@@ -1,6 +1,6 @@
 ---
 name: grill-to-issue
-description: 既存の issue・PR を踏まえて、起票したい issue の内容をインタビューで固め、GitHub に issue を立てる。設計の深掘りは起票後の grill-with-docs に委ねる。
+description: 既存の issue と PR を踏まえて、起票したい issue の内容をインタビューで固め、GitHub に issue を立てる。設計を詰めることは起票後の grill-with-docs に委ねる。
 argument-hint: "[テーマ]"
 disable-model-invocation: true
 ---
@@ -19,7 +19,7 @@ disable-model-invocation: true
 このスキルは「何を、どこまでやる issue か」を固めて起票するまでを担う。
 ISSUE-FORMAT.md のうち埋めるのは、リード文、「スコープ」、「完了条件」、「注記」である。
 「決定」「設計」「実装時に決めること」は、インタビューの中で自然に出てきた事柄だけを書き、埋めるための質問はしない。
-設計の深掘りは起票後に `/grill-with-docs <番号>` で行う。同じ論点を二つのスキルで二度聞かない。
+設計を詰めることは起票後に `/grill-with-docs <番号>` で行う。同じ論点を二つのスキルで二度聞かない。
 
 ## 既存の issue・PR の確認
 
@@ -72,7 +72,7 @@ gh issue list --state all --limit 20 --search "<テーマのキーワード>" --
 - 「完了条件」が、達成したかどうかを外から判定できる形で書ける
 
 「どう作るか」に踏み込む質問が出てきたら、それは grill-with-docs の領分である。
-ユーザーの回答にすでに含まれていれば「決定」に書き、含まれていなければ深掘りせず「実装時に決めること」に残す。
+ユーザーの回答にすでに含まれていれば「決定」に書き、含まれていなければ追って聞かず「実装時に決めること」に残す。
 
 ## 起票
 
