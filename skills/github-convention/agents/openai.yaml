@@ -1,0 +1,3 @@
+interface:
+  display_name: "GitHub Convention"
+  short_description: "issue・PR・gh コマンドの規約"

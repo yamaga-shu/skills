@@ -1,0 +1,3 @@
+interface:
+  display_name: "Implement from Issue"
+  short_description: "issue の実装計画どおりに実装し、PR を出す"
