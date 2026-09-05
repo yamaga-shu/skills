@@ -10,7 +10,8 @@ disable-model-invocation: true
 引数の先頭の数字を issue 番号として扱う。残りがあれば、インタビューで重点的に詰めるテーマとして扱う。
 issue 番号が無ければ、始める前にユーザーに聞く。
 
-開始前に Skill ツールを 4 回呼び、"grilling"、"doc-convention"、"domain-modeling"、"github-convention" をこの順にそれぞれ読み込む。1 回の呼び出しに複数の名前を渡さない。
+開始前に Skill ツールで "grilling"、"doc-convention"、"domain-modeling"、"github-convention" を 1 つずつ読み込む。
+同じセッションで既に読み込んだものは読み直さない。1 回の呼び出しに複数の名前を渡さない。
 
 - grilling がインタビューの進め方を決める
 - doc-convention が書く場所と、同じ事実を複数箇所に書かない原則を決める

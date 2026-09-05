@@ -9,7 +9,8 @@ disable-model-invocation: true
 
 引数があれば、起票したい issue のテーマとして扱う。無ければ、一覧の確認を終えてから最初のラウンドで聞く。
 
-開始前に Skill ツールを 2 回呼び、"grilling"、"github-convention" をこの順にそれぞれ読み込む。1 回の呼び出しに複数の名前を渡さない。
+開始前に Skill ツールで "grilling"、"github-convention" を 1 つずつ読み込む。
+同じセッションで既に読み込んだものは読み直さない。1 回の呼び出しに複数の名前を渡さない。
 
 - grilling がインタビューの進め方を決める
 - github-convention がタイトルと本文の書き方、gh コマンドでの本文の渡し方を決める

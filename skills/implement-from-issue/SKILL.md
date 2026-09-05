@@ -10,7 +10,7 @@ argument-hint: "<issue番号>"
 引数が無くても、このセッションで plan-from-issue の計画を承認したばかりなら、その issue の番号を使い、ユーザーに聞き直さない。
 どちらも無ければ、始める前にユーザーに聞く。
 
-開始前に Skill ツールを 3 回呼び、"git-convention"、"github-convention"、"doc-convention" をこの順にそれぞれ読み込む。
+開始前に Skill ツールで "git-convention"、"github-convention"、"doc-convention" を 1 つずつ読み込む。
 同じセッションで既に読み込んだものは読み直さない。1 回の呼び出しに複数の名前を渡さない。
 
 - git-convention がブランチの切り方、コミットの単位、コミットメッセージの書き方を決める

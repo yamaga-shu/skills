@@ -9,7 +9,8 @@ disable-model-invocation: true
 
 引数の先頭の数字を issue 番号として扱う。無ければ、始める前にユーザーに聞く。
 
-開始前に Skill ツールを 4 回呼び、"grilling"、"git-convention"、"github-convention"、"doc-convention" をこの順にそれぞれ読み込む。1 回の呼び出しに複数の名前を渡さない。
+開始前に Skill ツールで "grilling"、"git-convention"、"github-convention"、"doc-convention" を 1 つずつ読み込む。
+同じセッションで既に読み込んだものは読み直さない。1 回の呼び出しに複数の名前を渡さない。
 
 - grilling が確認の聞き方（ラウンドの書式、事実は自分で調べる）を決める
 - git-convention がブランチ名、コミットの単位、コミットメッセージの書き方を決める
