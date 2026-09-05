@@ -1,0 +1,5 @@
+interface:
+  display_name: "Grill to Issue"
+  short_description: "既存 issue を踏まえてインタビューし、issue を立てる"
+policy:
+  allow_implicit_invocation: false

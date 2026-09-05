@@ -1,0 +1,3 @@
+interface:
+  display_name: "Git Convention"
+  short_description: "ブランチ名・コミットメッセージの規約"

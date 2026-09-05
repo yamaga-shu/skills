@@ -1,0 +1,5 @@
+interface:
+  display_name: "Plan from Issue"
+  short_description: "issue を読み、コミット単位の実装計画を立てる"
+policy:
+  allow_implicit_invocation: false

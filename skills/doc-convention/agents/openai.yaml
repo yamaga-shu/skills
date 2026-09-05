@@ -1,0 +1,3 @@
+interface:
+  display_name: "Doc Convention"
+  short_description: "README/AGENTS.md/コメントの分担と重複禁止"

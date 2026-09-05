@@ -1,0 +1,5 @@
+interface:
+  display_name: "Grill with Docs"
+  short_description: "設計をグリルし、用語集・ADR・issue に記録する"
+policy:
+  allow_implicit_invocation: false
