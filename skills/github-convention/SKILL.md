@@ -57,6 +57,21 @@ AI エージェントが GitHub 上の issue と PR を扱う際に従う規約�
   - 理由: 失効を即時に反映する要件が加わり、クライアント判定では満たせないと分かったため
   ```
 
+## issue の読み方
+
+本文とコメントは次で読む。
+`--comments` は非対話環境ではコメントだけを出力し本文が落ちるため使わない。
+
+```bash
+gh issue view <番号> --json title,body,comments,parent,subIssuesSummary,closedByPullRequestsReferences
+```
+
+- 親 issue（`parent`）があれば本文も読み、親の「決定」と「含まない」を前提に加える
+- `closedByPullRequestsReferences` が、その issue を閉じる PR である。本文の全文検索で PR を探さない。
+  同じ数字を含む無関係な PR を拾うため
+- 実装計画は、コメントのうち最新の「## 実装計画」である
+- 本文が ISSUE-FORMAT.md の構成でなければ、本文全体から読み取る
+
 ## PR
 
 - タイトルは、その PR が何を成し遂げるかを簡潔に述べる。
@@ -94,6 +109,7 @@ issue や PR を作る前、コメントを投稿する前に、以下を自問�
 - issue に複数の目的が混ざっていないか。変更行数の見積もりが 2000 行を超えていないか
 - 分割を本文のリンクで済ませ、sub-issue で結んでいない issue はないか
 - 1 つの PR で複数の issue や親 issue を `Closes` していないか
+- その issue を閉じる open な PR が既に無いか。あれば新しい PR を作らず、その PR を更新しているか
 - 設計の改訂を、本文を編集せずコメントだけで済ませていないか
 - `Closes` を PR 本文ではなくコミットに書いていないか
 - 本文をファイル経由で渡していないか

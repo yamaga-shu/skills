@@ -25,14 +25,12 @@ grill-with-docs は「どう作るか」を決め、issue の「決定」「設�
 
 ## issue を読む
 
-`gh issue view <番号> --json title,body,comments,parent,subIssuesSummary` で本文とコメントを読む。
-`--comments` は非対話環境ではコメントだけを出力し本文が落ちるため使わない。
+github-convention の「issue の読み方」に従って本文とコメントを読む。
 
 - 「決定」「設計」「スコープ」は確定した前提として扱い、聞き直さない
 - 「実装時に決めること」「注記」は、計画に影響するものだけを確認の候補にする
 - コメントの改訂の記録を読み、本文の現在の文がどの経緯で決まったかを把握する。
   先行するセッションの「実装計画」コメントがあれば、それを出発点にする
-- 親 issue があれば本文も読み、親の「決定」と「含まない」を前提に加える
 - sub-issue を持つ issue は PR を持たないので計画の対象にしない。どの sub-issue を計画するかをユーザーに聞く
 - 本文が ISSUE-FORMAT.md の構成でなければ、本文全体から「何を作るか」と「完了条件」を読み取り、
   読み取れない部分を確認の候補にする
@@ -45,14 +43,15 @@ grill-with-docs は「どう作るか」を決め、issue の「決定」「設�
 git branch --show-current
 git status --short
 git fetch --prune
-git branch -a | grep '/<番号>/'
-gh issue view <番号> --json closedByPullRequestsReferences
 ```
 
-- ブランチは git-convention の命名に issue 番号が入るので、名前で探す。
-  PR は本文の `Closes` を GitHub が解決した `closedByPullRequestsReferences` で探す。
-  本文の全文検索は、同じ数字を含む無関係な PR を拾うので使わない
-- issue に対応するブランチや PR が既にあれば、そのブランチのコミットを `git log` で読み、続きを計画する。作り直さない
+- 対応する PR は、issue を読んだときの `closedByPullRequestsReferences` で知る。
+  PR があれば `gh pr view <PR番号> --json headRefName` でブランチを得る
+- PR が無ければブランチ名で探す。AGENTS.md の「Git 規約」で上書きされた形式も含め、
+  実際に使われているブランチ名の形式に issue 番号が入るときだけ `git branch -a | grep '/<番号>/'` を使う。
+  入らない形式なら名前では探せないので、既存ブランチの有無を確認の候補にする
+- issue に対応するブランチや PR が既にあれば、そのブランチのコミットを `git log` で読み、続きを計画する。作り直さない。
+  PR があれば、その番号を計画の「ブランチ」に書く
 - 未コミットの変更があれば、計画の対象と重なるかを見て、扱いを確認の候補にする
 - ブランチ名の `<ユーザー名>` は git-convention の手順で決める。決まらなければ確認の候補にする
 
