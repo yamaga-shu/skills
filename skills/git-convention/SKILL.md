@@ -55,11 +55,12 @@ docs: ...             # 全体に及ぶので scope を省く
 ## ブランチ
 
 既定ブランチへ直接コミットしない。作業は必ずブランチを切って PR 経由でマージする。
-既定ブランチは設定ではなく、次のコマンドで検出する。オフラインなら二つ目を使う。
+既定ブランチは設定ではなく検出する。次を上から順に試し、成功した最初の結果を使う。すべて失敗したらユーザーに聞く。
 
 ```bash
-gh repo view --json defaultBranchRef -q .defaultBranchRef.name
 git symbolic-ref --short refs/remotes/origin/HEAD | sed 's|^origin/||'
+gh repo view --json defaultBranchRef -q .defaultBranchRef.name
+git remote set-head origin -a && git symbolic-ref --short refs/remotes/origin/HEAD | sed 's|^origin/||'
 ```
 
 ### 命名
@@ -87,7 +88,8 @@ docs/alice/readme-typo          # issue なし
 
    ```bash
    git fetch --prune
-   git for-each-ref refs/remotes --format='%(authorname)%09%(refname:short)' | grep "$(git config user.name)"
+   git for-each-ref refs/remotes --format='%(authorname)%09%(refname:short)' \
+     | awk -F'\t' -v n="$(git config user.name)" '$1 == n'
    ```
 
 2. 無ければ `git config user.name` から短い名前を作り、**ユーザーに確認する。**
