@@ -56,9 +56,9 @@ CLI を使わない場合は、`skills/<name>` を `.claude/skills/<name>`（プ
 ## リポジトリ固有の設定
 
 スキルは用語集や ADR の置き場所、ブランチ名の形式やコミットメッセージの言語に既定値を持つ。
-リポジトリで変える場合は、ルートの AGENTS.md に書く。書き方は doc-convention の「正本の表」、
-git-convention の「前提」を参照。既定ブランチは git-convention の手順で検出するので設定しない。
+リポジトリで変える場合は、ルートの AGENTS.md に書く。AGENTS.md が無いリポジトリでは、ルートの CLAUDE.md に書く。
+書き方は doc-convention の「正本の表」、git-convention の「前提」を参照。
+既定ブランチは git-convention の手順で検出するので設定しない。
 
-スキルは AGENTS.md を明示的に読むので、エージェントが AGENTS.md を自動で読み込まなくても上書きは効く。
-ただし Claude Code が自動で読むのは CLAUDE.md なので、スキルを通さない普段の作業にも上書きを効かせたいなら、
-CLAUDE.md に `@AGENTS.md` と書いて取り込む。
+スキルは AGENTS.md を明示的に読み、無ければ CLAUDE.md を読むので、エージェントがどちらも自動で読み込まなくても上書きは効く。
+両方があるリポジトリでは AGENTS.md だけを読む。
