@@ -11,6 +11,7 @@
 | [implement-from-issue](skills/implement-from-issue/SKILL.md) | モデルとユーザー | issue の「実装計画」コメントに従ってブランチを切り、計画のコミット単位で実装し、PR を出す。plan-from-issue の直後なら同じセッションで計画を読み直さずに続ける |
 | [grilling](skills/grilling/SKILL.md) | モデルとユーザー | 設計ツリーをラウンド単位で質問するインタビューの手順 |
 | [domain-modeling](skills/domain-modeling/SKILL.md) | モデルとユーザー | 用語集（CONTEXT.md）と ADR を書く規律 |
+| [domain-design](skills/domain-design/SKILL.md) | ユーザーのみ | issue の「決定」を実現する構造をどの設計パターンで組むかをインタビューで詰め、完成した CONTEXT.md の言葉でコードと突き合わせて mermaid で描き、「設計」節に書く。grill-with-docs の後、plan-from-issue の前に任意で使う |
 | [doc-convention](skills/doc-convention/SKILL.md) | モデルとユーザー | README と AGENTS.md の分担、同じ事実を複数箇所に書かない、コメントを書く基準 |
 | [git-convention](skills/git-convention/SKILL.md) | モデルとユーザー | ブランチ名とコミットメッセージの規約 |
 | [github-convention](skills/github-convention/SKILL.md) | モデルとユーザー | issue と PR の書き方、gh コマンドでの本文の渡し方 |
@@ -20,8 +21,9 @@
 という流れを想定している。
 `plan-from-issue` は計画を承認したセッションのまま `implement-from-issue` に進めるので、
 計画と実装を同じセッションで続けても、別のセッションに分けてもよい。
+`grill-with-docs` と `plan-from-issue` の間で `domain-design` を使うと、決定を実現する設計パターンを詰め、issue の「設計」節を用語集の言葉で描き直せる。
 
-`grill-to-issue`、`grill-with-docs`、`plan-from-issue`、`implement-from-issue` は単体では動かない。
+`grill-to-issue`、`grill-with-docs`、`plan-from-issue`、`implement-from-issue`、`domain-design` は単体では動かない。
 入口ごとに、次のスキルを一緒に入れる。
 表は、その入口から Skill ツールで読み込まれうるスキルをすべて含めた閉じた集合である。
 
@@ -31,6 +33,7 @@
 | `grill-with-docs` | `grilling`、`doc-convention`、`domain-modeling`、`github-convention`、`git-convention` |
 | `plan-from-issue` | `grilling`、`git-convention`、`github-convention`、`doc-convention`、`domain-modeling`、`implement-from-issue` |
 | `implement-from-issue` | `git-convention`、`github-convention`、`doc-convention`、`domain-modeling` |
+| `domain-design` | `grilling`、`doc-convention`、`domain-modeling`、`github-convention`、`git-convention` |
 
 `grilling`、`domain-modeling`、`grill-with-docs` は [mattpocock/skills](https://github.com/mattpocock/skills) を
 日本語に改訂し、`doc-convention` への依存を加えたもの（原著: MIT License, Copyright (c) 2026 Matt Pocock）。

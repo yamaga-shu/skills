@@ -1,0 +1,5 @@
+interface:
+  display_name: "Domain Design"
+  short_description: "設計パターンを詰め、CONTEXT.md の言葉でドメイン図を描く"
+policy:
+  allow_implicit_invocation: false
