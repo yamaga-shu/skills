@@ -84,10 +84,8 @@ Claude Code では Skill ツールを使い、Codex ではインストール先�
 公式との差異、対象の決め方、対応する引数は各 SKILL.md と [公式ソース記録](skills/code-review/references/official-sources.md) を参照する。
 
 `implement-from-issue` の PR 前には、実装履歴を継承しないレビュー用セッションと、さらに別の簡素化用セッションを順に使う。
-各段階で検証して git-convention に従いコミットし、変更なしなら空コミットは作らない。
-最後に実装セッションで最終コードを検証する。
+手順と検証条件は [implement-from-issue の該当節](skills/implement-from-issue/SKILL.md#pr-前の独立セッション) を参照する。
 起動方法は [独立セッション](skills/implement-from-issue/references/independent-sessions.md) を参照する。
-新規セッションを作れない環境では PR 作成を止め、その制約を報告する。
 
 ## リポジトリ固有の設定
 
