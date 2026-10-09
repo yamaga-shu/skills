@@ -1,0 +1,3 @@
+interface:
+  display_name: "Code Review"
+  short_description: "変更に起因するバグを根拠付きで報告し、指定時だけ修正する"
