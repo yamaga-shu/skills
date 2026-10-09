@@ -1,0 +1,3 @@
+interface:
+  display_name: "Simplify"
+  short_description: "変更コードを4観点で整理し、振る舞いを保って修正と検証を行う"
