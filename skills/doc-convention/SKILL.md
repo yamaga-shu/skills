@@ -37,7 +37,7 @@ AI エージェントがドキュメントとコード内コメントを書く�
 - まだ無い場所は、最初に必要になった時点で作る。
 - 設計書（スペック）を一つの文書として置かず、表に従って README・ADR・用語集・issue に分ける。
 - ADR を書くかどうかの判断と書式は domain-modeling スキルが正本である
-  （ADR を書く前に Skill ツールで "domain-modeling" を読み込む）。
+  （ADR を書く前に[domain-modeling](../domain-modeling/SKILL.md) の指示を読み込む）。
   複数コンテキストに用語集を分ける場合の構成も同スキルに従う。
 - 参照の例: `pyproject.toml` の requires-python に「正本は Dockerfile の FROM」。
 

@@ -4,14 +4,16 @@ description: issue に残した実装計画に従って、ブランチを切り�
 argument-hint: "<issue番号>"
 ---
 
-引数: $ARGUMENTS
+引数は、ユーザーがこのスキルとともに指定した内容を使う。
+Claude Code では `$ARGUMENTS`、Codex では依頼文から読み取る。
 
 引数の先頭の数字を issue 番号として扱う。
 引数が無くても、このセッションで plan-from-issue の計画を承認したばかりなら、その issue の番号を使い、ユーザーに聞き直さない。
 どちらも無ければ、始める前にユーザーに聞く。
 
-開始前に Skill ツールで "git-convention"、"github-convention"、"doc-convention" を 1 つずつ読み込む。
-同じセッションで既に読み込んだものは読み直さない。1 回の呼び出しに複数の名前を渡さない。
+開始前に[git-convention](../git-convention/SKILL.md)、[github-convention](../github-convention/SKILL.md)、[doc-convention](../doc-convention/SKILL.md) の指示を読み込む。
+Claude Code では Skill ツールで 1 つずつ読み込み、Codex ではリンク先の `SKILL.md` を読む。
+同じセッションで既に読み込んだものは読み直さない。
 
 - git-convention がブランチの切り方、コミットの単位、コミットメッセージの書き方を決める
 - github-convention が PR の書き方と、issue 本文の改訂の仕方を決める
@@ -22,7 +24,7 @@ argument-hint: "<issue番号>"
 - このセッションで plan-from-issue の計画を承認したばかりなら、その計画から始める。issue とコードを読み直さない
 - そうでなければ github-convention の「issue の読み方」に従って本文とコメントを読み、
   最新の「実装計画」コメントを計画とする。
-  計画のコメントが無ければ `/plan-from-issue <番号>` を案内して止める。計画無しに実装を始めない。
+  計画のコメントが無ければ `plan-from-issue` スキル（issue 番号を指定）を案内して止める。計画無しに実装を始めない。
   計画の投稿後に本文の改訂コメントがあれば、計画がその改訂を織り込んでいるかを確かめ、
   織り込んでいなければユーザーに指摘してから進める
 

@@ -11,7 +11,7 @@ AI エージェントが GitHub 上の issue と PR を扱う際に従う規約�
 ## 前提
 
 - **言語**は git-convention スキルの「前提」に従う。正本はそちらで、ここには書かない。
-  まだ読んでいなければ、Skill ツールで "git-convention" を読み込む。
+  まだ読んでいなければ、[git-convention](../git-convention/SKILL.md) の指示を読み込む。
 - **設計の検討の経緯の正本は issue** とし、設計書をリポジトリに md ファイルとして置かない。
   正本の分担は doc-convention スキルの「正本の表」に従う。
 - リポジトリに `.github/ISSUE_TEMPLATE/` や `.github/PULL_REQUEST_TEMPLATE.md` があれば、

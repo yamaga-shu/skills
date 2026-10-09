@@ -1,6 +1,6 @@
 # skills
 
-複数のリポジトリで共通して使う Claude Code のスキル集。
+複数のリポジトリで共通して使う Claude Code と Codex のスキル集。
 各スキルは `skills/<name>/SKILL.md` に置く。
 
 | スキル | 呼び出し | 用途 |
@@ -25,7 +25,7 @@
 
 `grill-to-issue`、`grill-with-docs`、`plan-from-issue`、`implement-from-issue`、`domain-design` は単体では動かない。
 入口ごとに、次のスキルを一緒に入れる。
-表は、その入口から Skill ツールで読み込まれうるスキルをすべて含めた閉じた集合である。
+表は、その入口から読み込まれうるスキルをすべて含めた閉じた集合である。
 
 | 入口 | 一緒に入れるスキル |
 | --- | --- |
@@ -44,17 +44,35 @@
 
 ```bash
 # 現在のプロジェクトに全部入れる
-npx skills add yamaga-shu/skills --skill '*'
+npx skills add yamaga-shu/skills --skill '*' --agent claude-code codex
 
 # 全プロジェクトで使う（ユーザーレベル）
-npx skills add yamaga-shu/skills --skill '*' -g
+npx skills add yamaga-shu/skills --skill '*' --agent claude-code codex -g
 
 # 一部だけ入れる
-npx skills add yamaga-shu/skills --skill doc-convention
+npx skills add yamaga-shu/skills --skill doc-convention --agent claude-code codex
 ```
 
-CLI を使わない場合は、`skills/<name>` を `.claude/skills/<name>`（プロジェクト）
-または `~/.claude/skills/<name>`（ユーザー）にコピーする。
+必要なエージェントだけを `--agent` に指定してもよい。
+CLI の symlink モードでは `.agents/skills/` に実体を置き、Claude Code からも同じファイルを参照する。
+更新は `npx skills update` で行う。
+
+CLI を使わない場合、Codex には `skills/<name>` を `.agents/skills/<name>`（プロジェクト）
+または `~/.agents/skills/<name>`（ユーザー）に置く。
+Claude Code には `.claude/skills/<name>` または `~/.claude/skills/<name>` から同じ実体へのシンボリックリンクを置く。
+既に `.claude/skills/` に実体があるプロジェクトは、未作成の `.agents/skills` を `../.claude/skills` へのリンクにしてもよい。
+既存のファイルやディレクトリは上書きしない。
+[Codex のスキル探索](https://developers.openai.com/codex/skills/) はシンボリックリンクに対応している。
+
+## 呼び出し方
+
+Claude Code では `/plan-from-issue 123`、Codex では `$plan-from-issue 123` のように指定する。
+本文にある「スキルを読み込む」は、そのスキルの指示を読むことを指す。
+Claude Code では Skill ツールを使い、Codex ではインストール先の `SKILL.md` を読む。
+依存スキルへの相対リンクは、同じスキル配置先に入れたディレクトリを参照する。
+
+呼び出し制限は、Claude Code の `disable-model-invocation` と Codex の `agents/openai.yaml` の
+`policy.allow_implicit_invocation` で指定している。
 
 ## リポジトリ固有の設定
 
