@@ -81,9 +81,18 @@ Claude Code では Skill ツールを使い、Codex ではインストール先�
 `/code-review --fix` または `$code-review --fix` で修正を含むレビューを行う。
 通常のレビューは投稿や修正をしない。
 `/simplify` または `$simplify` は整理と検証を行う。
-対象と引数の詳細は各 SKILL.md、公式仕様とライセンスは [公式ソース記録](skills/code-review/references/official-sources.md) を参照する。
+対象と引数の詳細は各 SKILL.md を参照する。
 
 PR 前の実行順序と検証条件は [implement-from-issue](skills/implement-from-issue/SKILL.md#pr-前の独立セッション) を参照する。
+
+## レビュー用スキルの出典
+
+`code-review` と `simplify` は、[Claude Code の公開仕様](https://code.claude.com/docs/en/commands) と [公式 plugin](https://github.com/anthropics/claude-plugins-official) を基に独自に記述したスキルである。
+公開プロンプトのコピーや翻訳、非公開実装の流用は行っていない。
+調査した版、公式との差異、ライセンスの記録は [Issue #6](https://github.com/yamaga-shu/skills/issues/6) を参照する。
+
+Claude Code ではローカルの同名スキルが bundled command を置き換える。
+公式 `/review` の別名は、このローカルの `code-review` を呼ばない。
 
 ## リポジトリ固有の設定
 

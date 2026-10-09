@@ -61,8 +61,26 @@ Claude Code では Skill ツールで 1 つずつ読み込み、Codex ではリ�
 
 実装コミットと完了条件の確認後、次の2段階を新しい別々のセッションで順に行う。
 実装セッションの自己レビューや、履歴を引き継ぐ fork は代替にしない。
-起動方法と公式仕様は [references/independent-sessions.md](references/independent-sessions.md) を読む。
 セッションを起動できない場合は制約を報告して止め、同一セッションで済ませたり、PR を作ったりしない。
+
+### 新しいセッションの起動
+
+対象領域を cwd とし、段階ごとに新しいプロセスを起動する。
+委任プロンプトにはローカルの SKILL.md の絶対パスと、次節の引き渡し情報を含める。
+公式 bundled skill と名前が衝突しても、指定したローカルスキルを読むよう伝える。
+具体的なフラグは導入済みの CLI の help でも確認する。
+
+- Claude Code: [公式 CLI reference](https://code.claude.com/docs/en/cli-reference) の `claude -p` を使う。
+  段階ごとに新しい UUID を `--session-id` に指定し、`--output-format json` の session ID と結果を保存する。
+  `--continue`、`--resume`、`--fork-session` は使わない。
+- Codex: [公式 non-interactive mode](https://learn.chatgpt.com/docs/non-interactive-mode) の新しい `codex exec` を使い、`resume` は使わない。
+  `--json` のイベントと最終結果を記録し、各実行の thread ID を保存する。
+  修正には、環境で許可済みの sandbox 設定を使う。
+
+アプリの新規タスク、または履歴を継承しない設定の subagent でもよい。
+いずれも各段階で異なるセッション識別子と履歴を継承しないことを確認し、確認できなければ代替にしない。
+通常の権限設定を使い、権限を迂回するフラグを足さない。
+必要な編集や commit が許可されない場合は、具体的な操作を報告して止める。
 
 ### 引き渡す領域と情報
 
