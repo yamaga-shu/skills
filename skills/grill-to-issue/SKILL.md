@@ -5,12 +5,14 @@ argument-hint: "[テーマ]"
 disable-model-invocation: true
 ---
 
-引数: $ARGUMENTS
+引数は、ユーザーがこのスキルとともに指定した内容を使う。
+Claude Code では `$ARGUMENTS`、Codex では依頼文から読み取る。
 
 引数があれば、起票したい issue のテーマとして扱う。無ければ、一覧の確認を終えてから最初のラウンドで聞く。
 
-開始前に Skill ツールで "grilling"、"github-convention" を 1 つずつ読み込む。
-同じセッションで既に読み込んだものは読み直さない。1 回の呼び出しに複数の名前を渡さない。
+開始前に[grilling](../grilling/SKILL.md)、[github-convention](../github-convention/SKILL.md) の指示を読み込む。
+Claude Code では Skill ツールで 1 つずつ読み込み、Codex ではリンク先の `SKILL.md` を読む。
+同じセッションで既に読み込んだものは読み直さない。
 
 - grilling がインタビューの進め方を決める
 - github-convention がタイトルと本文の書き方、gh コマンドでの本文の渡し方を決める
@@ -20,7 +22,7 @@ disable-model-invocation: true
 このスキルは「何を、どこまでやる issue か」を固めて起票するまでを担う。
 ISSUE-FORMAT.md のうち埋めるのは、リード文、「スコープ」、「完了条件」、「注記」である。
 「決定」「設計」「実装時に決めること」は、インタビューの中で自然に出てきた事柄だけを書き、埋めるための質問はしない。
-設計を詰めることは起票後に `/grill-with-docs <番号>` で行う。同じ論点を二つのスキルで二度聞かない。
+設計を詰めることは起票後に `grill-with-docs` スキル（issue 番号を指定）で行う。同じ論点を二つのスキルで二度聞かない。
 
 ## 既存の issue・PR の確認
 
@@ -85,4 +87,4 @@ gh issue list --state all --limit 20 --search "<テーマのキーワード>" --
 - sub-issue として立てるときは `--parent <親の番号>` を付ける。親を先に立て、その番号を使う
 - リポジトリに `.github/ISSUE_TEMPLATE/` があれば、github-convention に従いその構成を優先する
 
-起票したら issue の URL を示し、「決定」「設計」を詰める必要があるなら `/grill-with-docs <番号>` を案内する。
+起票したら issue の URL を示し、「決定」「設計」を詰める必要があるなら `grill-with-docs` スキル（issue 番号を指定）を案内する。

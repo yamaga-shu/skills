@@ -5,13 +5,15 @@ argument-hint: "<issue番号> [対象]"
 disable-model-invocation: true
 ---
 
-引数: $ARGUMENTS
+引数は、ユーザーがこのスキルとともに指定した内容を使う。
+Claude Code では `$ARGUMENTS`、Codex では依頼文から読み取る。
 
 引数の先頭の数字を issue 番号として扱う。残りがあれば、重点的に詰めて描く対象（集約、状態遷移、処理の流れなど）として扱う。
 issue 番号が無ければ、始める前にユーザーに聞く。
 
-開始前に Skill ツールで "grilling"、"doc-convention"、"domain-modeling"、"github-convention" を 1 つずつ読み込む。
-同じセッションで既に読み込んだものは読み直さない。1 回の呼び出しに複数の名前を渡さない。
+開始前に[grilling](../grilling/SKILL.md)、[doc-convention](../doc-convention/SKILL.md)、[domain-modeling](../domain-modeling/SKILL.md)、[github-convention](../github-convention/SKILL.md) の指示を読み込む。
+Claude Code では Skill ツールで 1 つずつ読み込み、Codex ではリンク先の `SKILL.md` を読む。
+同じセッションで既に読み込んだものは読み直さない。
 
 - grilling がパターンを詰めるインタビューの進め方を決める
 - doc-convention が用語集の場所と、同じ事実を複数箇所に書かない原則を決める
@@ -36,9 +38,9 @@ issue はある時点の判断の記録なので、後にコードが変わっ�
 
 次のときは詰めずに止める。
 
-- 用語集が無い。`/grill-with-docs <番号>` で用語集を作ってから戻るよう案内する
+- 用語集が無い。`grill-with-docs` スキル（issue 番号を指定）で用語集を作ってから戻るよう案内する
 - 「決定」が空、または振る舞いが決まっていない。何を実現するかが決まらなければ構造は決められない。
-  足りない論点を挙げて `/grill-with-docs <番号>` を案内する
+  足りない論点を挙げて `grill-with-docs` スキル（issue 番号を指定）を案内する
 
 ## コードを調べる
 
@@ -83,7 +85,7 @@ issue はある時点の判断の記録なので、後にコードが変わっ�
 - 「決定」、親 issue の「決定」、ADR が既に決めているパターンは聞き直さない
 - ユーザーが実装に委ねると答えた論点は「実装時に決めること」に回し、図にはその構造を描かない
 - 答えが「決定」の振る舞いやスコープを変える論点は、このスキルでは決めない。
-  ラウンドの中で指摘し、その論点を避けて図を描けるなら補足に書き、描けなければ止めて `/grill-with-docs <番号>` を案内する
+  ラウンドの中で指摘し、その論点を避けて図を描けるなら補足に書き、描けなければ止めて `grill-with-docs` スキル（issue 番号を指定）を案内する
 
 通常は 1〜2 ラウンドで済む。フロンティアが空になってから図を描く。
 
@@ -134,5 +136,5 @@ issue はある時点の判断の記録なので、後にコードが変わっ�
 本文に「設計」節が無ければ、ISSUE-FORMAT.md の順序に従って「スコープ」の後に足す。
 ADR は ADR-FORMAT.md に従って書き、比較と経緯の置き場所としてこの issue へリンクする。
 
-書き終えたら、直した `CONTEXT.md` と書いた ADR があればそのファイルを示し、`/plan-from-issue <番号>` を案内して終える。
+書き終えたら、直した `CONTEXT.md` と書いた ADR があればそのファイルを示し、`plan-from-issue` スキル（issue 番号を指定）を案内して終える。
 `CONTEXT.md` と ADR のコミットはしない。

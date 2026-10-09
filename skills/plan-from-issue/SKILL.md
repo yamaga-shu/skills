@@ -5,12 +5,14 @@ argument-hint: "<issue番号>"
 disable-model-invocation: true
 ---
 
-引数: $ARGUMENTS
+引数は、ユーザーがこのスキルとともに指定した内容を使う。
+Claude Code では `$ARGUMENTS`、Codex では依頼文から読み取る。
 
 引数の先頭の数字を issue 番号として扱う。無ければ、始める前にユーザーに聞く。
 
-開始前に Skill ツールで "grilling"、"git-convention"、"github-convention"、"doc-convention" を 1 つずつ読み込む。
-同じセッションで既に読み込んだものは読み直さない。1 回の呼び出しに複数の名前を渡さない。
+開始前に[grilling](../grilling/SKILL.md)、[git-convention](../git-convention/SKILL.md)、[github-convention](../github-convention/SKILL.md)、[doc-convention](../doc-convention/SKILL.md) の指示を読み込む。
+Claude Code では Skill ツールで 1 つずつ読み込み、Codex ではリンク先の `SKILL.md` を読む。
+同じセッションで既に読み込んだものは読み直さない。
 
 - grilling が確認の聞き方（ラウンドの書式、事実は自分で調べる）を決める
 - git-convention がブランチ名、コミットの単位、コミットメッセージの書き方を決める
@@ -22,7 +24,7 @@ disable-model-invocation: true
 grill-with-docs は「どう作るか」を決め、issue の「決定」「設計」に残す。
 このスキルは、決まったことを「どの順に、どのコミットで作るか」に落とす。
 設計の質問はしない。issue の「決定」「設計」が計画を立てるのに足りなければ、
-足りない論点を挙げて `/grill-with-docs <番号>` を案内し、計画を止める。
+足りない論点を挙げて `grill-with-docs` スキル（issue 番号を指定）を案内し、計画を止める。
 
 ## issue を読む
 
@@ -65,7 +67,7 @@ issue の「設計」と「含む」に挙がったものについて、変更�
 - 既存のテストの置き場所と書き方。新しいテストはそれに揃える
 - issue の「設計」が前提とするコードの構造が、実際にそうなっているか。食い違いがあれば確認の候補にする
 - 変更行数の見積もり。github-convention の分割の基準を超えそうなら、計画を止めて分割を提案する。
-  分割は github-convention の sub-issue の手順、または `/grill-to-issue` で行い、分割後の一つの issue を改めて計画する
+  分割は github-convention の sub-issue の手順、または `grill-to-issue` スキルで行い、分割後の一つの issue を改めて計画する
 - README、用語集、ADR に影響するか。影響すれば doc-convention の正本の表に従って場所を決め、
   `docs` のコミットとして計画に含める
 
@@ -111,7 +113,7 @@ issue の「設計」と「含む」に挙がったものについて、変更�
 
 記録したら、このまま実装に進むかをユーザーに聞く。
 
-- 進むなら、Skill ツールで "implement-from-issue" を読み込む。このとき args に issue 番号を渡す。
+- 進むなら、[implement-from-issue](../implement-from-issue/SKILL.md) の指示を読み込む。その issue 番号を引き継ぐ。
   承認した計画からこのセッションで続け、issue とコードは既に読んでいるので読み直さない
 - 進まないなら、ブランチ名と最初のコミットの件名を示して終える。
-  実装は後で `/implement-from-issue <番号>` から始められる
+  実装は後で `implement-from-issue` スキル（issue 番号を指定）から始められる
