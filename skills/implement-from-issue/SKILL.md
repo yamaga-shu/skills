@@ -64,6 +64,8 @@ Claude Code では Skill ツールで 1 つずつ読み込み、Codex ではリ�
 起動方法と公式仕様は [references/independent-sessions.md](references/independent-sessions.md) を読む。
 セッションを起動できない場合は制約を報告して止め、同一セッションで済ませたり、PR を作ったりしない。
 
+### 引き渡す領域と情報
+
 各段階の開始時に、引き渡す領域が clean で、対象ブランチと HEAD が期待どおりか確認する。
 実装セッションはその領域への書き込みを停止し、委任先が完了するまで待つ。
 同じブランチへ複数の書き込み担当を同時に走らせない。
@@ -77,6 +79,8 @@ Claude Code では Skill ツールで 1 つずつ読み込み、Codex ではリ�
 - 該当する AGENTS.md または CLAUDE.md と、依存スキルの絶対パス
 - 実行する検証コマンド、環境の制約、既に確認した結果
 - 対象の修正と git-convention に従う commit の許可、push と投稿と PR 作成をしない制約
+
+### レビューから最終検証まで
 
 1. 新しいセッションに [code-review](../code-review/SKILL.md) を `--fix` と明示的な比較範囲付きで実行させる。
    修正後の最終コードを検証し、変更があれば [git-convention](../git-convention/SKILL.md) の指示でコミットする。

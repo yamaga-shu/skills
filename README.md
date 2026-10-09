@@ -8,7 +8,7 @@
 | [grill-to-issue](skills/grill-to-issue/SKILL.md) | ユーザーのみ | 既存の issue と PR を一覧で確認したうえで、起票したい issue のスコープと完了条件をインタビューで固め、issue を立てる。設計を詰めることは grill-with-docs に委ねる |
 | [grill-with-docs](skills/grill-with-docs/SKILL.md) | ユーザーのみ | issue 番号を受け取り、その issue の計画や設計を徹底的にインタビューし、用語集と ADR を書きながら決定を issue に記録する |
 | [plan-from-issue](skills/plan-from-issue/SKILL.md) | ユーザーのみ | issue 番号を受け取り、本文、コメント、コードを読んで、git-convention のコミット単位に沿った実装計画を立て、承認後に issue のコメントに残す。計画を左右する不明点だけを確認する |
-| [implement-from-issue](skills/implement-from-issue/SKILL.md) | モデルとユーザー | issue の「実装計画」コメントに従ってブランチを切り、計画のコミット単位で実装し、独立した別セッションでレビュー修正と簡素化を順にコミットしてから PR を出す。plan-from-issue の直後なら同じセッションで計画を読み直さずに続ける |
+| [implement-from-issue](skills/implement-from-issue/SKILL.md) | モデルとユーザー | issue の実装計画に従って実装し、独立セッションのレビューと簡素化を経て PR を出す |
 | [code-review](skills/code-review/SKILL.md) | モデルとユーザー | 変更、PR、ブランチ、パスの正しさを根拠付きでレビューする。`--fix` を指定した場合だけ修正し検証する |
 | [simplify](skills/simplify/SKILL.md) | モデルとユーザー | 変更コードを4観点で整理し、振る舞いを保って修正と検証を行う |
 | [grilling](skills/grilling/SKILL.md) | モデルとユーザー | 設計ツリーをラウンド単位で質問するインタビューの手順 |
@@ -81,11 +81,9 @@ Claude Code では Skill ツールを使い、Codex ではインストール先�
 `/code-review --fix` または `$code-review --fix` で修正を含むレビューを行う。
 通常のレビューは投稿や修正をしない。
 `/simplify` または `$simplify` は整理と検証を行う。
-公式との差異、対象の決め方、対応する引数は各 SKILL.md と [公式ソース記録](skills/code-review/references/official-sources.md) を参照する。
+対象と引数の詳細は各 SKILL.md、公式仕様とライセンスは [公式ソース記録](skills/code-review/references/official-sources.md) を参照する。
 
-`implement-from-issue` の PR 前には、実装履歴を継承しないレビュー用セッションと、さらに別の簡素化用セッションを順に使う。
-手順と検証条件は [implement-from-issue の該当節](skills/implement-from-issue/SKILL.md#pr-前の独立セッション) を参照する。
-起動方法は [独立セッション](skills/implement-from-issue/references/independent-sessions.md) を参照する。
+PR 前の実行順序と検証条件は [implement-from-issue](skills/implement-from-issue/SKILL.md#pr-前の独立セッション) を参照する。
 
 ## リポジトリ固有の設定
 
