@@ -41,6 +41,15 @@ AI エージェントが GitHub 上の issue と PR を扱う際に従う規約�
     「完了条件」は sub-issue がすべて閉じていることとする。
     sub-issue の一覧は GitHub が親に表示するため、本文に書き写さない。
   - sub-issue の本文は通常の issue と同じ構成で書く。親の「決定」は前提として扱い、書き写さず参照する。
+- **先行する issue の完了が必要なら、後続の issue に GitHub の正式な「blocked by」を設定する。**
+  本文に順序やリンクを書くだけでは、GitHub の依存関係として扱われないため、代用しない。
+  - 親と sub-issue は作業の分割を表し、「blocked by」は先行条件を表す。
+    親子関係とは別に設定する。
+  - 実際の先行条件だけを登録し、並行できる issue を直列につながない。
+  - 設定前に既存の依存関係を確認し、循環や重複を避ける。
+  - 利用可能な GitHub CLI、API、または画面で設定し、設定後に issue を再取得して、後続が意図した先行 issue に blocked by されていることを確認する。
+  - 機能や権限の制約で設定できなければ、設定できなかった依存関係と理由を報告する。
+    本文への記載だけで設定済みとしない。
 - **設計に改訂が生じたら、本文を編集して正本を最新に保つ。**
   読み手が本文だけで現在の設計に達せるようにし、コメントを遡らないと分からない状態を作らない。
   本文の編集は `gh issue view <番号> --json body -q .body` で現在の本文を取り出し、
@@ -63,10 +72,11 @@ AI エージェントが GitHub 上の issue と PR を扱う際に従う規約�
 `--comments` は非対話環境ではコメントだけを出力し本文が落ちるため使わない。
 
 ```bash
-gh issue view <番号> --json title,body,comments,parent,subIssuesSummary,closedByPullRequestsReferences
+gh issue view <番号> --json title,body,comments,parent,subIssuesSummary,blockedBy,blocking,closedByPullRequestsReferences
 ```
 
 - 親 issue（`parent`）があれば本文も読み、親の「決定」と「含まない」を前提に加える
+- `blockedBy` と `blocking` を読み、先行条件と、その issue の完了を待つ後続の issue を確認する
 - `closedByPullRequestsReferences` が、その issue を閉じる PR である。本文の全文検索で PR を探さない。
   同じ数字を含む無関係な PR を拾うため
 - 実装計画は、コメントのうち最新の「## 実装計画」である
@@ -108,6 +118,8 @@ issue や PR を作る前、コメントを投稿する前に、以下を自問�
 - issue 本文は手順書になっていないか。判断とその根拠が書かれているか
 - issue に複数の目的が混ざっていないか。変更行数の見積もりが 2000 行を超えていないか
 - 分割を本文のリンクで済ませ、sub-issue で結んでいない issue はないか
+- 実際の先行条件を「blocked by」に設定し、循環や重複、並行できる issue の直列化を避けたか。
+  設定後の再取得で確認したか
 - 1 つの PR で複数の issue や親 issue を `Closes` していないか
 - その issue を閉じる open な PR が既に無いか。あれば新しい PR を作らず、その PR を更新しているか
 - 設計の改訂を、本文を編集せずコメントだけで済ませていないか
