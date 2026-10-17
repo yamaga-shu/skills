@@ -10,17 +10,18 @@ Claude Code では `$ARGUMENTS`、Codex では依頼文から読み取る。
 
 引数があれば、起票したい issue のテーマとして扱う。無ければ、一覧の確認を終えてから最初のラウンドで聞く。
 
-開始前に[grilling](../grilling/SKILL.md)、[github-convention](../github-convention/SKILL.md) の指示を読み込む。
+開始前に[grilling](../grilling/SKILL.md)、[github-convention](../github-convention/SKILL.md)、[workflow-tier](../workflow-tier/SKILL.md) の指示を読み込む。
 Claude Code では Skill ツールで 1 つずつ読み込み、Codex ではリンク先の `SKILL.md` を読む。
 同じセッションで既に読み込んだものは読み直さない。
 
 - grilling がインタビューの進め方を決める
 - github-convention がタイトルと本文の書き方、gh コマンドでの本文の渡し方を決める
+- workflow-tier が issue の区分と、区分ごとに起票後に通す工程を決める
 
 ## grill-with-docs との分担
 
 このスキルは「何を、どこまでやる issue か」を固めて起票するまでを担う。
-ISSUE-FORMAT.md のうち埋めるのは、リード文、「スコープ」、「完了条件」、「注記」である。
+ISSUE-FORMAT.md のうち埋めるのは、リード文、「スコープ」、「完了条件」、「進め方」、「注記」である。
 「決定」「設計」「実装時に決めること」は、インタビューの中で自然に出てきた事柄だけを書き、埋めるための質問はしない。
 設計を詰めることは起票後に `grill-with-docs` スキル（issue 番号を指定）で行う。同じ論点を二つのスキルで二度聞かない。
 
@@ -68,11 +69,15 @@ gh issue list --state all --limit 20 --search "<テーマのキーワード>" --
 そこから「含む」「含まない」「完了条件」が枝分かれする。
 最初のラウンドでは、既存 issue の一覧から読み取った関連や慣習を前提として提示し、テーマの確認から始める。
 
-フロンティアが空になる条件は次の三つが揃うことである。
+フロンティアが空になる条件は次の四つが揃うことである。
 
 - リード文として「何を達成するか」を数行で言い切れる
 - 「含む」「含まない」が列挙でき、「含まない」にはなぜ今やらないかの理由がある
 - 「完了条件」が、達成したかどうかを外から判定できる形で書ける
+- workflow-tier の区分が決まっている
+
+区分は、スコープと完了条件が固まった後のラウンドで、判定した区分と理由を推奨として示し、ユーザーに決めてもらう。
+変更行数の見積もりは「重複・分割の扱い」と同じくサブエージェントに調べさせる。
 
 「どう作るか」に踏み込む質問が出てきたら、それは grill-with-docs の領分である。
 ユーザーの回答にすでに含まれていれば「決定」に書き、含まれていなければ追って聞かず「実装時に決めること」に残す。
@@ -87,4 +92,8 @@ gh issue list --state all --limit 20 --search "<テーマのキーワード>" --
 - sub-issue として立てるときは `--parent <親の番号>` を付ける。親を先に立て、その番号を使う
 - リポジトリに `.github/ISSUE_TEMPLATE/` があれば、github-convention に従いその構成を優先する
 
-起票したら issue の URL を示し、「決定」「設計」を詰める必要があるなら `grill-with-docs` スキル（issue 番号を指定）を案内する。
+起票したら issue の URL を示し、workflow-tier の区分ごとの工程に従って次のスキルを案内する。
+
+- 軽微なら `implement-from-issue` スキル（issue 番号を指定）
+- 通常なら `plan-from-issue` スキル（issue 番号を指定）。「決定」が計画に足りないなら先に `grill-with-docs` スキル
+- 大型なら `grill-with-docs` スキル（issue 番号を指定）

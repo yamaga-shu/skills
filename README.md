@@ -8,7 +8,7 @@
 | [grill-to-issue](skills/grill-to-issue/SKILL.md) | ユーザーのみ | 既存の issue と PR を一覧で確認したうえで、起票したい issue のスコープと完了条件をインタビューで固め、issue を立てる。設計を詰めることは grill-with-docs に委ねる |
 | [grill-with-docs](skills/grill-with-docs/SKILL.md) | ユーザーのみ | issue 番号を受け取り、その issue の計画や設計を徹底的にインタビューし、用語集と ADR を書きながら決定を issue に記録する |
 | [plan-from-issue](skills/plan-from-issue/SKILL.md) | ユーザーのみ | issue 番号を受け取り、本文、コメント、コードを読んで、git-convention のコミット単位に沿った実装計画を立て、承認後に issue のコメントに残す。計画を左右する不明点だけを確認する |
-| [implement-from-issue](skills/implement-from-issue/SKILL.md) | モデルとユーザー | issue の実装計画に従って実装し、独立セッションのレビューと簡素化を経て PR を出す |
+| [implement-from-issue](skills/implement-from-issue/SKILL.md) | モデルとユーザー | issue の実装計画に従って実装し、区分に応じたレビューと簡素化を経て PR を出す |
 | [code-review](skills/code-review/SKILL.md) | モデルとユーザー | 変更、PR、ブランチ、パスの正しさを根拠付きでレビューする。`--fix` を指定した場合だけ修正し検証する |
 | [simplify](skills/simplify/SKILL.md) | モデルとユーザー | 変更コードを4観点で整理し、振る舞いを保って修正と検証を行う |
 | [grilling](skills/grilling/SKILL.md) | モデルとユーザー | 設計ツリーをラウンド単位で質問するインタビューの手順 |
@@ -26,16 +26,19 @@
 計画と実装を同じセッションで続けても、別のセッションに分けてもよい。
 `grill-with-docs` と `plan-from-issue` の間で `domain-design` を使うと、決定を実現する設計パターンを詰め、issue の「設計」節を用語集の言葉で描き直せる。
 
+この流れを全部通すのは区分が大型の issue である。
+`grill-to-issue` が issue を軽微、通常、大型に分け、区分に応じて省く工程は `workflow-tier` が決める。
+
 `grill-to-issue`、`grill-with-docs`、`plan-from-issue`、`implement-from-issue`、`domain-design`、`code-review`、`simplify` は単体では動かない。
 入口ごとに、次のスキルを一緒に入れる。
 表は、その入口から読み込まれうるスキルをすべて含めた閉じた集合である。
 
 | 入口 | 一緒に入れるスキル |
 | --- | --- |
-| `grill-to-issue` | `grilling`、`github-convention`、`git-convention` |
+| `grill-to-issue` | `grilling`、`github-convention`、`git-convention`、`workflow-tier` |
 | `grill-with-docs` | `grilling`、`doc-convention`、`domain-modeling`、`github-convention`、`git-convention` |
-| `plan-from-issue` | `grilling`、`git-convention`、`github-convention`、`doc-convention`、`domain-modeling`、`implement-from-issue`、`code-review`、`simplify` |
-| `implement-from-issue` | `git-convention`、`github-convention`、`doc-convention`、`domain-modeling`、`code-review`、`simplify` |
+| `plan-from-issue` | `grilling`、`git-convention`、`github-convention`、`doc-convention`、`domain-modeling`、`workflow-tier`、`implement-from-issue`、`code-review`、`simplify` |
+| `implement-from-issue` | `git-convention`、`github-convention`、`doc-convention`、`domain-modeling`、`workflow-tier`、`code-review`、`simplify` |
 | `domain-design` | `grilling`、`doc-convention`、`domain-modeling`、`github-convention`、`git-convention` |
 | `code-review` | `doc-convention`、`domain-modeling` |
 | `simplify` | `code-review`、`doc-convention`、`domain-modeling` |
@@ -84,7 +87,7 @@ Claude Code では Skill ツールを使い、Codex ではインストール先�
 `/simplify` または `$simplify` は整理と検証を行う。
 対象と引数の詳細は各 SKILL.md を参照する。
 
-PR 前の実行順序と検証条件は [implement-from-issue](skills/implement-from-issue/SKILL.md#pr-前の独立セッション) を参照する。
+PR 前の実行順序と検証条件は [implement-from-issue](skills/implement-from-issue/SKILL.md#pr-前のレビューと整理) を参照する。
 
 ## レビュー用スキルの出典
 

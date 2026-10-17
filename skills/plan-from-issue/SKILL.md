@@ -10,7 +10,7 @@ Claude Code では `$ARGUMENTS`、Codex では依頼文から読み取る。
 
 引数の先頭の数字を issue 番号として扱う。無ければ、始める前にユーザーに聞く。
 
-開始前に[grilling](../grilling/SKILL.md)、[git-convention](../git-convention/SKILL.md)、[github-convention](../github-convention/SKILL.md)、[doc-convention](../doc-convention/SKILL.md) の指示を読み込む。
+開始前に[grilling](../grilling/SKILL.md)、[git-convention](../git-convention/SKILL.md)、[github-convention](../github-convention/SKILL.md)、[doc-convention](../doc-convention/SKILL.md)、[workflow-tier](../workflow-tier/SKILL.md) の指示を読み込む。
 Claude Code では Skill ツールで 1 つずつ読み込み、Codex ではリンク先の `SKILL.md` を読む。
 同じセッションで既に読み込んだものは読み直さない。
 
@@ -18,6 +18,7 @@ Claude Code では Skill ツールで 1 つずつ読み込み、Codex ではリ�
 - git-convention がブランチ名、コミットの単位、コミットメッセージの書き方を決める
 - github-convention が issue の読み方、本文の改訂の仕方、コメントの投稿の仕方を決める
 - doc-convention がドキュメントの変更をどこに置くかを決める
+- workflow-tier が issue の区分と、区分ごとに通す工程を決める
 
 ## grill-with-docs との分担
 
@@ -30,6 +31,7 @@ grill-with-docs は「どう作るか」を決め、issue の「決定」「設�
 
 github-convention の「issue の読み方」に従って本文とコメントを読む。
 
+- 「進め方」の区分を読む。区分が軽微なら計画を立てず、`implement-from-issue` スキル（issue 番号を指定）を案内して止める。ユーザーが計画を求めたときは続ける
 - 「決定」「設計」「スコープ」は確定した前提として扱い、聞き直さない
 - 「実装時に決めること」「注記」は、計画に影響するものだけを確認の候補にする
 - コメントの改訂の記録を読み、本文の現在の文がどの経緯で決まったかを把握する。
@@ -68,6 +70,7 @@ issue の「設計」と「含む」に挙がったものについて、変更�
 - issue の「設計」が前提とするコードの構造が、実際にそうなっているか。食い違いがあれば確認の候補にする
 - 変更行数の見積もり。github-convention の分割の基準を超えそうなら、計画を止めて分割を提案する。
   分割は github-convention の sub-issue の手順、または `grill-to-issue` スキルで行い、分割後の一つの issue を改めて計画する
+- コードの実態や変更行数の見積もりが、より上の区分の条件に当てはまるか。当てはまれば workflow-tier に従い、区分の引き上げを確認の候補にする
 - README、用語集、ADR に影響するか。影響すれば doc-convention の正本の表に従って場所を決め、
   `docs` のコミットとして計画に含める
 
@@ -79,6 +82,7 @@ issue の「設計」と「含む」に挙がったものについて、変更�
 - 「実装時に決めること」のうち、答えで計画の構成が変わるもの。変わらないものは聞かず、計画に推奨案を書く
 - 環境、権限、外部リソースなど、調べても分からない前提
 - 既存ブランチや未コミットの変更の扱い
+- 区分の引き上げ
 - ブランチ名の `<ユーザー名>`
 
 質問は grilling のラウンドの書式で、推奨する答えを添えて聞く。事実は自分で調べ、ユーザーに聞かない。
