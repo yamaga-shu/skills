@@ -1,0 +1,3 @@
+interface:
+  display_name: "Workflow Tier"
+  short_description: "issue を三区分に分け、区分ごとに通す工程を決める"
