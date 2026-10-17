@@ -17,6 +17,7 @@
 | [doc-convention](skills/doc-convention/SKILL.md) | モデルとユーザー | README と AGENTS.md の分担、同じ事実を複数箇所に書かない、コメントを書く基準 |
 | [git-convention](skills/git-convention/SKILL.md) | モデルとユーザー | ブランチ名とコミットメッセージの規約 |
 | [github-convention](skills/github-convention/SKILL.md) | モデルとユーザー | issue と PR の書き方、gh コマンドでの本文の渡し方 |
+| [workflow-tier](skills/workflow-tier/SKILL.md) | モデルとユーザー | issue を軽微、通常、大型に分け、区分ごとに通す工程を決める |
 
 `grill-to-issue` で issue を立て、`grill-with-docs` でその issue の設計を詰め、
 `plan-from-issue` で実装計画を立て、`implement-from-issue` で計画どおりに実装して PR を出す、
