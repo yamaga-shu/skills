@@ -12,7 +12,7 @@
 | [code-review](skills/code-review/SKILL.md) | モデルとユーザー | 変更、PR、ブランチ、パスの正しさを根拠付きでレビューする。`--fix` を指定した場合だけ修正し検証する |
 | [simplify](skills/simplify/SKILL.md) | モデルとユーザー | 変更コードを4観点で整理し、振る舞いを保って修正と検証を行う |
 | [grilling](skills/grilling/SKILL.md) | モデルとユーザー | 設計ツリーをラウンド単位で質問するインタビューの手順 |
-| [domain-modeling](skills/domain-modeling/SKILL.md) | モデルとユーザー | 用語集（CONTEXT.md）と ADR を書く規律 |
+| [domain-modeling](skills/domain-modeling/SKILL.md) | モデルとユーザー | 用語集（CONTEXT.md）と ADR を書く規律と、変わりうる軸に備えて表や契約の形を選ぶ方針 |
 | [domain-design](skills/domain-design/SKILL.md) | ユーザーのみ | issue の「決定」を実現する構造をどの設計パターンで組むかをインタビューで詰め、完成した CONTEXT.md の言葉でコードと突き合わせて mermaid で描き、「設計」節に書く。grill-with-docs の後、plan-from-issue の前に任意で使う |
 | [doc-convention](skills/doc-convention/SKILL.md) | モデルとユーザー | README と AGENTS.md の分担、同じ事実を複数箇所に書かない、コメントを書く基準 |
 | [git-convention](skills/git-convention/SKILL.md) | モデルとユーザー | ブランチ名とコミットメッセージの規約 |
